@@ -10,93 +10,125 @@
     <style>
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #f8fafc; /* Slate 50 */
+            /* صورة غابة ضبابية فخمة مع طبقة تعتيم خفيفة جداً لتظهر التفاصيل */
+            background-color: #050a05;
+            background-image: linear-gradient(rgba(5, 15, 10, 0.3), rgba(0, 5, 0, 0.7)), url('https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=2574&auto=format&fit=crop');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #f8fafc;
             scroll-behavior: smooth;
         }
-        .gradient-text {
-            background: linear-gradient(to left, #059669, #0284c7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        
+        /* تأثير الزجاج الفخم للبطاقات - شفافية أكثر لنرى الغابة من خلفها */
         .content-card {
-            background: #ffffff;
+            background: rgba(10, 20, 15, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 1.5rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-            border: 1px solid #f1f5f9;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease, background 0.4s ease;
         }
         .content-card:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-5px);
+            background: rgba(10, 20, 15, 0.55);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(16, 185, 129, 0.3);
         }
-        /* Custom Quiz Options */
+        
+        /* ظلال للنصوص لتبقى مقروءة فوق الخلفية المليئة بالتفاصيل */
+        .text-glow {
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        /* Custom Quiz Options ليتناسب مع الثيم المظلم */
         .quiz-option-label {
             display: block;
             position: relative;
             cursor: pointer;
             padding: 1rem 1.25rem;
-            border: 2px solid #e2e8f0;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 1rem;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             font-weight: 500;
-            color: #475569;
+            color: #e2e8f0;
+            backdrop-filter: blur(5px);
         }
         .quiz-option-label:hover {
-            border-color: #cbd5e1;
-            background-color: #f8fafc;
+            border-color: rgba(16, 185, 129, 0.6);
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #ffffff;
+            box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.1);
         }
         .quiz-option-input:checked + .quiz-option-label {
-            border-color: #0ea5e9;
-            background-color: #f0f9ff;
-            color: #0369a1;
+            border-color: #10b981; 
+            background-color: rgba(16, 185, 129, 0.25);
+            color: #6ee7b7;
             font-weight: 700;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
         }
+        
+        /* ألوان الإجابات في الثيم المظلم */
         .correct-ans {
-            background-color: #dcfce7 !important;
-            border-color: #22c55e !important;
-            color: #166534 !important;
+            background-color: rgba(5, 150, 105, 0.4) !important;
+            border-color: #34d399 !important;
+            color: #a7f3d0 !important;
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.3) !important;
         }
         .wrong-ans {
-            background-color: #fee2e2 !important;
+            background-color: rgba(220, 38, 38, 0.3) !important;
             border-color: #ef4444 !important;
-            color: #991b1b !important;
+            color: #fecaca !important;
         }
-        .nav-link.active {
-            background-color: #0ea5e9;
-            color: white;
+        
+        /* تخصيص شريط التمرير (Scrollbar) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050a05; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10b981; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #059669; 
         }
     </style>
 </head>
-<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900">
+<body class="antialiased selection:bg-emerald-900 selection:text-emerald-100">
 
-    <!-- Hero Header -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <!-- Hero Header (زجاجي شفاف جداً لنرى الغابة) -->
+    <header class="bg-[#050a05]/40 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50 shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center gap-3">
-                    <div class="w-12 h-12 bg-gradient-to-br from-sky-500 to-emerald-500 rounded-xl flex items-center justify-center text-white text-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-800 border border-emerald-400/50 rounded-xl flex items-center justify-center text-white text-2xl shadow-[0_0_20px_rgba(16,185,129,0.4)]">
                         <i class="fas fa-brain"></i>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-black text-slate-800">التفكير الناقد</h1>
-                        <p class="text-sm font-bold text-sky-600">الفصل الثالث</p>
+                        <h1 class="text-2xl font-black text-white tracking-wide text-glow">التفكير الناقد</h1>
+                        <p class="text-sm font-bold text-emerald-400 text-glow">الفصل الثالث</p>
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <div class="bg-slate-100 border border-slate-200 px-5 py-2 rounded-full flex items-center gap-2">
-                        <i class="fas fa-pen-nib text-slate-500"></i>
-                        <span class="text-sm font-bold text-slate-700">إعداد وتصميم: <span class="text-emerald-600 text-base">قيس الجازي</span></span>
+                    <div class="bg-black/30 border border-emerald-500/30 px-5 py-2 rounded-full flex items-center gap-2 shadow-inner backdrop-blur-md">
+                        <i class="fas fa-pen-nib text-yellow-400"></i>
+                        <span class="text-sm font-bold text-gray-200">إعداد وتصميم: <span class="text-emerald-400 text-base drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]">قيس الجازي</span></span>
                     </div>
                 </div>
             </div>
             
             <!-- Horizontal Nav -->
             <nav class="flex overflow-x-auto py-3 gap-2 hide-scrollbar">
-                <a href="#definition" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors"><i class="fas fa-book ml-1"></i> التعريفات</a>
-                <a href="#characteristics" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors"><i class="fas fa-star ml-1"></i> الخصائص والصفات</a>
-                <a href="#skills" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors"><i class="fas fa-tools ml-1"></i> المهارات والاختبارات</a>
-                <a href="#obstacles" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors"><i class="fas fa-shield-alt ml-1"></i> المعوقات</a>
-                <a href="#development" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors"><i class="fas fa-seedling ml-1"></i> التنمية والمعلم</a>
-                <a href="#quiz" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold bg-sky-100 text-sky-700 hover:bg-sky-200 transition-colors"><i class="fas fa-tasks ml-1"></i> اختبر نفسك</a>
+                <a href="#definition" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-glow"><i class="fas fa-book ml-1"></i> التعريفات</a>
+                <a href="#characteristics" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-glow"><i class="fas fa-star ml-1 text-yellow-500"></i> الخصائص والصفات</a>
+                <a href="#skills" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-glow"><i class="fas fa-tools ml-1"></i> المهارات والاختبارات</a>
+                <a href="#obstacles" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-glow"><i class="fas fa-shield-alt ml-1 text-red-400"></i> المعوقات</a>
+                <a href="#development" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold text-gray-300 hover:bg-white/10 hover:text-white transition-colors text-glow"><i class="fas fa-seedling ml-1 text-emerald-400"></i> التنمية والمعلم</a>
+                <a href="#quiz" class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold bg-emerald-600/30 text-emerald-100 hover:bg-emerald-500/50 border border-emerald-400/50 transition-colors shadow-[0_0_15px_rgba(16,185,129,0.3)]"><i class="fas fa-tasks ml-1"></i> اختبر نفسك</a>
             </nav>
         </div>
     </header>
@@ -105,43 +137,43 @@
     <main class="max-w-5xl mx-auto px-4 py-10 space-y-16">
 
         <!-- Banner for Mobile -->
-        <div class="md:hidden bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 text-white text-center shadow-lg">
-            <i class="fas fa-graduation-cap text-4xl text-emerald-400 mb-3"></i>
-            <h2 class="text-xl font-bold">ملخص مهارات التفكير الناقد</h2>
-            <p class="text-slate-300 mt-2 text-sm">من إعداد وتنسيق: <span class="text-emerald-400 font-extrabold text-lg">قيس الجازي</span></p>
+        <div class="md:hidden bg-gradient-to-r from-emerald-900/60 to-black/60 backdrop-blur-xl border border-emerald-500/30 rounded-2xl p-6 text-white text-center shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+            <i class="fas fa-crown text-4xl text-yellow-400 mb-3 drop-shadow-[0_0_15px_rgba(250,204,21,0.6)]"></i>
+            <h2 class="text-xl font-bold tracking-wide text-glow">ملخص مهارات التفكير الناقد</h2>
+            <p class="text-gray-200 mt-2 text-sm text-glow">من إعداد وتنسيق: <span class="text-emerald-400 font-extrabold text-lg">قيس الجازي</span></p>
         </div>
 
         <!-- Section 1: Definitions -->
         <section id="definition" class="scroll-mt-32">
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl">
+                <div class="w-10 h-10 rounded-full bg-emerald-900/60 border border-emerald-400/50 text-emerald-300 flex items-center justify-center text-xl shadow-[0_0_20px_rgba(16,185,129,0.3)] backdrop-blur-md">
                     <i class="fas fa-quote-right"></i>
                 </div>
-                <h2 class="text-3xl font-black text-slate-800">تعريف التفكير الناقد</h2>
+                <h2 class="text-3xl font-black text-white tracking-wide text-glow">تعريف التفكير الناقد</h2>
             </div>
             
             <div class="grid md:grid-cols-2 gap-6">
                 <!-- تعريف السامرائي -->
-                <div class="content-card p-8 border-t-4 border-t-sky-500">
-                    <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                        <i class="fas fa-user-tie text-sky-500"></i> تعريف هاشم السامرائي (1994)
+                <div class="content-card p-8 !border-t-yellow-500">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 text-glow">
+                        <i class="fas fa-user-tie text-yellow-400 drop-shadow-md"></i> تعريف هاشم السامرائي (1994)
                     </h3>
-                    <p class="text-lg text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <p class="text-lg text-gray-200 leading-relaxed bg-black/40 p-4 rounded-xl border border-white/10 shadow-inner">
                         "هو عملية تقويم ومناقشات وخبرات، ويتصف بالموضوعية والصدق".
                     </p>
                     <div class="mt-6">
-                        <h4 class="font-bold text-slate-800 mb-3">له بعدان أساسيان:</h4>
+                        <h4 class="font-bold text-emerald-300 mb-3 text-glow">له بعدان أساسيان:</h4>
                         <ul class="space-y-3">
                             <li class="flex items-start gap-3">
-                                <span class="bg-sky-100 text-sky-600 p-1 rounded-md mt-1"><i class="fas fa-eye text-sm w-4 text-center"></i></span>
+                                <span class="bg-black/60 border border-white/20 text-emerald-400 p-1 rounded-md mt-1 shadow-sm"><i class="fas fa-eye text-sm w-4 text-center"></i></span>
                                 <div>
-                                    <span class="font-bold text-slate-800">البعد الأول (نظري):</span> <span class="text-slate-600">الحاجة إلى تقييم المعلومات.</span>
+                                    <span class="font-bold text-white text-glow">البعد الأول (نظري):</span> <span class="text-gray-300">الحاجة إلى تقييم المعلومات.</span>
                                 </div>
                             </li>
                             <li class="flex items-start gap-3">
-                                <span class="bg-sky-100 text-sky-600 p-1 rounded-md mt-1"><i class="fas fa-hand-pointer text-sm w-4 text-center"></i></span>
+                                <span class="bg-black/60 border border-white/20 text-emerald-400 p-1 rounded-md mt-1 shadow-sm"><i class="fas fa-hand-pointer text-sm w-4 text-center"></i></span>
                                 <div>
-                                    <span class="font-bold text-slate-800">البعد الثاني (عملي):</span> <span class="text-slate-600">الرغبة في اختيار الأداء (التحقق والوصول لقرار).</span>
+                                    <span class="font-bold text-white text-glow">البعد الثاني (عملي):</span> <span class="text-gray-300">الرغبة في اختيار الأداء (التحقق والوصول لقرار).</span>
                                 </div>
                             </li>
                         </ul>
@@ -149,13 +181,14 @@
                 </div>
 
                 <!-- تعريف صفحة 81 المحدث -->
-                <div class="content-card p-8 border-t-4 border-t-emerald-500 bg-emerald-50/30">
-                    <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                        <i class="fas fa-lightbulb text-emerald-500"></i> تعريف الكتاب المعتمد (ص 81)
+                <div class="content-card p-8 !border-t-emerald-500 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-emerald-500/20 rounded-full blur-3xl"></div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2 text-glow relative z-10">
+                        <i class="fas fa-lightbulb text-emerald-400 drop-shadow-md"></i> تعريف الكتاب المعتمد (ص 81)
                     </h3>
-                    <div class="bg-white p-6 rounded-xl border border-emerald-100 shadow-sm text-center h-full flex flex-col justify-center">
-                        <i class="fas fa-brain text-4xl text-emerald-400 mb-4 opacity-50"></i>
-                        <p class="text-2xl font-black text-slate-800 leading-relaxed">
+                    <div class="bg-black/40 p-6 rounded-xl border border-emerald-500/30 shadow-inner text-center h-full flex flex-col justify-center relative z-10">
+                        <i class="fas fa-brain text-5xl text-emerald-400/50 mb-4 drop-shadow-lg"></i>
+                        <p class="text-2xl font-black text-white leading-relaxed text-glow">
                             "هو نشاط عقلي يتطلب من الفرد القيام بعمليات عقلية واعية"
                         </p>
                     </div>
@@ -166,98 +199,98 @@
         <!-- Section 2: Characteristics -->
         <section id="characteristics" class="scroll-mt-32">
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl">
+                <div class="w-10 h-10 rounded-full bg-yellow-900/50 border border-yellow-500/50 text-yellow-400 flex items-center justify-center text-xl shadow-[0_0_20px_rgba(234,179,8,0.3)] backdrop-blur-md">
                     <i class="fas fa-id-card"></i>
                 </div>
-                <h2 class="text-3xl font-black text-slate-800">خصائص وصفات المفكر الناقد</h2>
+                <h2 class="text-3xl font-black text-white tracking-wide text-glow">خصائص وصفات المفكر الناقد</h2>
             </div>
 
             <div class="space-y-8">
                 <!-- العوامل الكبرى -->
                 <div class="content-card p-6 md:p-8">
-                    <h3 class="text-xl font-bold text-slate-800 mb-6 border-b border-slate-100 pb-4">الخصائص والعوامل الكبرى (ص 81)</h3>
+                    <h3 class="text-xl font-bold text-white mb-6 border-b border-white/20 pb-4 text-glow">الخصائص والعوامل الكبرى (ص 81)</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-300 transition-colors">
-                            <h4 class="font-bold text-blue-700 mb-2"><i class="fas fa-balance-scale ml-1"></i> عامل التقويم</h4>
-                            <p class="text-sm text-slate-600">فحص الأدلة وموازنتها بموضوعية للوصول إلى حكم صحيح.</p>
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10 hover:border-emerald-400/60 hover:bg-white/10 transition-all backdrop-blur-sm">
+                            <h4 class="font-bold text-emerald-300 mb-2"><i class="fas fa-balance-scale ml-1"></i> عامل التقويم</h4>
+                            <p class="text-sm text-gray-300">فحص الأدلة وموازنتها بموضوعية للوصول إلى حكم صحيح.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-300 transition-colors">
-                            <h4 class="font-bold text-blue-700 mb-2"><i class="fas fa-database ml-1"></i> العامل المعرفي</h4>
-                            <p class="text-sm text-slate-600">امتلاك حصيلة واسعة من المعلومات والمفاهيم تدعم التفكير.</p>
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10 hover:border-emerald-400/60 hover:bg-white/10 transition-all backdrop-blur-sm">
+                            <h4 class="font-bold text-emerald-300 mb-2"><i class="fas fa-database ml-1"></i> العامل المعرفي</h4>
+                            <p class="text-sm text-gray-300">امتلاك حصيلة واسعة من المعلومات والمفاهيم تدعم التفكير.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-300 transition-colors">
-                            <h4 class="font-bold text-blue-700 mb-2"><i class="fas fa-project-diagram ml-1"></i> فهم قواعد المنطق</h4>
-                            <p class="text-sm text-slate-600">الاستدلال الصحيح والربط المنطقي وتجنب المغالطات.</p>
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10 hover:border-emerald-400/60 hover:bg-white/10 transition-all backdrop-blur-sm">
+                            <h4 class="font-bold text-emerald-300 mb-2"><i class="fas fa-project-diagram ml-1"></i> فهم قواعد المنطق</h4>
+                            <p class="text-sm text-gray-300">الاستدلال الصحيح والربط المنطقي وتجنب المغالطات.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-300 transition-colors">
-                            <h4 class="font-bold text-blue-700 mb-2"><i class="fas fa-search ml-1"></i> القدرة على التفسير</h4>
-                            <p class="text-sm text-slate-600">تحليل المواقف واستخراج المعاني الضمنية بدقة.</p>
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10 hover:border-emerald-400/60 hover:bg-white/10 transition-all backdrop-blur-sm">
+                            <h4 class="font-bold text-emerald-300 mb-2"><i class="fas fa-search ml-1"></i> القدرة على التفسير</h4>
+                            <p class="text-sm text-gray-300">تحليل المواقف واستخراج المعاني الضمنية بدقة.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-300 transition-colors">
-                            <h4 class="font-bold text-blue-700 mb-2"><i class="fas fa-heart ml-1"></i> العامل الوجداني</h4>
-                            <p class="text-sm text-slate-600">الرغبة في البحث عن الحقيقة والانفتاح لتقبل الرأي الآخر.</p>
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10 hover:border-emerald-400/60 hover:bg-white/10 transition-all backdrop-blur-sm">
+                            <h4 class="font-bold text-emerald-300 mb-2"><i class="fas fa-heart ml-1 text-red-400"></i> العامل الوجداني</h4>
+                            <p class="text-sm text-gray-300">الرغبة في البحث عن الحقيقة والانفتاح لتقبل الرأي الآخر.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-blue-300 transition-colors">
-                            <h4 class="font-bold text-blue-700 mb-2"><i class="fas fa-exclamation-circle ml-1"></i> الحساسية للمشكلات</h4>
-                            <p class="text-sm text-slate-600">الانتباه للثغرات والأخطاء قبل أن يلاحظها الآخرون.</p>
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10 hover:border-emerald-400/60 hover:bg-white/10 transition-all backdrop-blur-sm">
+                            <h4 class="font-bold text-emerald-300 mb-2"><i class="fas fa-exclamation-circle ml-1 text-yellow-400"></i> الحساسية للمشكلات</h4>
+                            <p class="text-sm text-gray-300">الانتباه للثغرات والأخطاء قبل أن يلاحظها الآخرون.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- صفات ال 15 & أوكسمن -->
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- صفات 15 -->
                     <div class="content-card p-6 md:p-8">
-                        <h3 class="text-xl font-bold text-slate-800 mb-6 border-b border-slate-100 pb-4">أول 15 صفة للمفكر (ص 82)</h3>
-                        <ul class="space-y-3 text-sm text-slate-700 font-medium list-none">
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">1.</span> الإلمام بالفكرة المراد نقدها.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">2.</span> منفتح على الأفكار الجديدة.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">3.</span> لا يجادل في أمر لا يعرفه.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">4.</span> يعرف متى يحتاج معلومات أكثر.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">5.</span> يفرق بين نتيجة (ربما) ونتيجة (لابد).</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">6.</span> يعرف اختلاف انطباعات الناس.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">7.</span> يتجنب الأخطاء الشائعة في الاستدلال.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">8.</span> يتساءل عما يبدو غير معقول.</li>
-                            <li class="flex gap-2 bg-blue-50 p-2 rounded"><span class="text-blue-600 font-bold">9.</span> يفصل التفكير العاطفي عن المنطقي.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">10.</span> يتخذ/يتخلى عن موقف عند توفر الأدلة.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">11.</span> يعطي جميع الجوانب نفس الأهمية.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">12.</span> يبحث عن الأسباب والبدائل.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">13.</span> يتعامل مع التعقيد بتنظيم.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">14.</span> يستخدم مصادر موثوقة ويشير إليها.</li>
-                            <li class="flex gap-2"><span class="text-blue-500 font-bold">15.</span> يبقى على صلة بجوهر الموضوع.</li>
+                        <h3 class="text-xl font-bold text-white mb-6 border-b border-white/20 pb-4 text-glow">أول 15 صفة للمفكر (ص 82)</h3>
+                        <ul class="space-y-3 text-sm text-gray-200 font-medium list-none">
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">1.</span> الإلمام بالفكرة المراد نقدها.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">2.</span> منفتح على الأفكار الجديدة.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">3.</span> لا يجادل في أمر لا يعرفه.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">4.</span> يعرف متى يحتاج معلومات أكثر.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">5.</span> يفرق بين نتيجة (ربما) ونتيجة (لابد).</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">6.</span> يعرف اختلاف انطباعات الناس.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">7.</span> يتجنب الأخطاء الشائعة في الاستدلال.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">8.</span> يتساءل عما يبدو غير معقول.</li>
+                            <li class="flex gap-2 bg-emerald-500/20 border border-emerald-400/50 p-2 rounded shadow-inner"><span class="text-emerald-300 font-black">9.</span> يفصل التفكير العاطفي عن المنطقي.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">10.</span> يتخذ/يتخلى عن موقف عند توفر الأدلة.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">11.</span> يعطي جميع الجوانب نفس الأهمية.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">12.</span> يبحث عن الأسباب والبدائل.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">13.</span> يتعامل مع التعقيد بتنظيم.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">14.</span> يستخدم مصادر موثوقة ويشير إليها.</li>
+                            <li class="flex gap-2 hover:text-white transition-colors"><span class="text-yellow-400 font-black drop-shadow-md">15.</span> يبقى على صلة بجوهر الموضوع.</li>
                         </ul>
                     </div>
 
                     <!-- أوكسمن -->
-                    <div class="content-card p-6 md:p-8 bg-slate-800 text-white border-none">
-                        <h3 class="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-4">خصائص أوكسمن الـ 4 (ص 82)</h3>
-                        <div class="space-y-5">
-                            <div class="flex gap-4">
-                                <div class="w-8 h-8 rounded bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0">1</div>
+                    <div class="content-card p-6 md:p-8 !bg-black/60 !border-t-yellow-500 relative overflow-hidden">
+                        <div class="absolute -left-20 -bottom-20 w-60 h-60 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                        <h3 class="text-xl font-bold text-white mb-6 border-b border-white/20 pb-4 text-glow relative z-10">خصائص أوكسمن الـ 4 (ص 82)</h3>
+                        <div class="space-y-6 relative z-10">
+                            <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5 hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-900/80 border border-emerald-400/50 text-emerald-300 flex items-center justify-center text-xl font-black shrink-0 shadow-[0_0_15px_rgba(16,185,129,0.3)]">1</div>
                                 <div>
-                                    <h4 class="font-bold text-emerald-400">القدرة على الملاحظة العميقة</h4>
-                                    <p class="text-sm text-slate-300 mt-1">عدم الاكتفاء بالسطحيات والغوص في التفاصيل.</p>
+                                    <h4 class="font-bold text-white text-glow">القدرة على الملاحظة العميقة</h4>
+                                    <p class="text-sm text-gray-300 mt-1">عدم الاكتفاء بالسطحيات والغوص في التفاصيل.</p>
                                 </div>
                             </div>
-                            <div class="flex gap-4">
-                                <div class="w-8 h-8 rounded bg-sky-500 text-white flex items-center justify-center font-bold shrink-0">2</div>
+                            <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5 hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-yellow-900/80 border border-yellow-500/50 text-yellow-400 flex items-center justify-center text-xl font-black shrink-0 shadow-[0_0_15px_rgba(234,179,8,0.3)]">2</div>
                                 <div>
-                                    <h4 class="font-bold text-sky-400">القدرة على النقد الموضوعي</h4>
-                                    <p class="text-sm text-slate-300 mt-1">تقييم الأمور بالأدلة بعيداً عن التحيز.</p>
+                                    <h4 class="font-bold text-white text-glow">القدرة على النقد الموضوعي</h4>
+                                    <p class="text-sm text-gray-300 mt-1">تقييم الأمور بالأدلة بعيداً عن التحيز.</p>
                                 </div>
                             </div>
-                            <div class="flex gap-4">
-                                <div class="w-8 h-8 rounded bg-purple-500 text-white flex items-center justify-center font-bold shrink-0">3</div>
+                            <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5 hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-blue-900/80 border border-blue-400/50 text-blue-300 flex items-center justify-center text-xl font-black shrink-0 shadow-[0_0_15px_rgba(59,130,246,0.3)]">3</div>
                                 <div>
-                                    <h4 class="font-bold text-purple-400">المناقشة والمرونة العقلية</h4>
-                                    <p class="text-sm text-slate-300 mt-1">تقبل الرأي الآخر وتعديل الأفكار وتحديد المشكلة.</p>
+                                    <h4 class="font-bold text-white text-glow">المناقشة والمرونة العقلية</h4>
+                                    <p class="text-sm text-gray-300 mt-1">تقبل الرأي الآخر وتعديل الأفكار وتحديد المشكلة.</p>
                                 </div>
                             </div>
-                            <div class="flex gap-4">
-                                <div class="w-8 h-8 rounded bg-amber-500 text-white flex items-center justify-center font-bold shrink-0">4</div>
+                            <div class="flex gap-4 items-center bg-white/5 p-3 rounded-xl border border-white/5 hover:bg-white/10 transition-colors">
+                                <div class="w-12 h-12 rounded-xl bg-purple-900/80 border border-purple-400/50 text-purple-300 flex items-center justify-center text-xl font-black shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.3)]">4</div>
                                 <div>
-                                    <h4 class="font-bold text-amber-400">القدرة على التنظيم</h4>
-                                    <p class="text-sm text-slate-300 mt-1">ترتيب الأفكار بشكل منهجي ومنطقي.</p>
+                                    <h4 class="font-bold text-white text-glow">القدرة على التنظيم</h4>
+                                    <p class="text-sm text-gray-300 mt-1">ترتيب الأفكار بشكل منهجي ومنطقي.</p>
                                 </div>
                             </div>
                         </div>
@@ -269,89 +302,89 @@
         <!-- Section 3: Skills & Tests -->
         <section id="skills" class="scroll-mt-32">
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xl">
+                <div class="w-10 h-10 rounded-full bg-blue-900/50 border border-blue-400/50 text-blue-300 flex items-center justify-center text-xl shadow-[0_0_20px_rgba(59,130,246,0.3)] backdrop-blur-md">
                     <i class="fas fa-layer-group"></i>
                 </div>
-                <h2 class="text-3xl font-black text-slate-800">المهارات والاختبارات</h2>
+                <h2 class="text-3xl font-black text-white tracking-wide text-glow">المهارات والاختبارات</h2>
             </div>
 
-            <div class="content-card p-6 md:p-8 mb-8">
-                <h3 class="text-xl font-bold text-slate-800 mb-6 border-b border-slate-100 pb-4">مهارات إينيس (Ennis) الـ 8 (ص 85)</h3>
+            <div class="content-card p-6 md:p-8 mb-8 !border-t-blue-500">
+                <h3 class="text-xl font-bold text-white mb-6 border-b border-white/20 pb-4 text-glow">مهارات إينيس (Ennis) الـ 8 (ص 85)</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="flex gap-3 p-3 rounded-lg hover:bg-slate-50 transition">
-                        <span class="text-purple-600 font-black text-lg">1</span>
-                        <p class="font-medium text-slate-700">استيعاب معنى العبارة.</p>
+                    <div class="flex gap-4 p-4 rounded-xl bg-black/30 border border-white/5 hover:border-blue-400/50 hover:bg-white/10 transition-all backdrop-blur-sm">
+                        <span class="text-blue-300 font-black text-xl drop-shadow-md">1</span>
+                        <p class="font-medium text-gray-200">استيعاب معنى العبارة.</p>
                     </div>
-                    <div class="flex gap-3 p-3 rounded-lg hover:bg-slate-50 transition">
-                        <span class="text-purple-600 font-black text-lg">2</span>
-                        <p class="font-medium text-slate-700">الحكم على درجة غموض العبارة أو منطقيتها.</p>
+                    <div class="flex gap-4 p-4 rounded-xl bg-black/30 border border-white/5 hover:border-blue-400/50 hover:bg-white/10 transition-all backdrop-blur-sm">
+                        <span class="text-blue-300 font-black text-xl drop-shadow-md">2</span>
+                        <p class="font-medium text-gray-200">الحكم على درجة غموض العبارة أو منطقيتها.</p>
                     </div>
-                    <div class="flex gap-3 p-3 rounded-lg hover:bg-slate-50 transition">
-                        <span class="text-purple-600 font-black text-lg">3</span>
-                        <p class="font-medium text-slate-700">الحكم على درجه تعارض العبارات مع بعضها.</p>
+                    <div class="flex gap-4 p-4 rounded-xl bg-black/30 border border-white/5 hover:border-blue-400/50 hover:bg-white/10 transition-all backdrop-blur-sm">
+                        <span class="text-blue-300 font-black text-xl drop-shadow-md">3</span>
+                        <p class="font-medium text-gray-200">الحكم على درجه تعارض العبارات مع بعضها.</p>
                     </div>
-                    <div class="flex gap-3 p-3 rounded-lg hover:bg-slate-50 transition">
-                        <span class="text-purple-600 font-black text-lg">4</span>
-                        <p class="font-medium text-slate-700">الحكم على مدى اتساق النتيجة مع المقدمات.</p>
+                    <div class="flex gap-4 p-4 rounded-xl bg-black/30 border border-white/5 hover:border-blue-400/50 hover:bg-white/10 transition-all backdrop-blur-sm">
+                        <span class="text-blue-300 font-black text-xl drop-shadow-md">4</span>
+                        <p class="font-medium text-gray-200">الحكم على مدى اتساق النتيجة مع المقدمات.</p>
                     </div>
-                    <div class="flex gap-3 p-3 rounded-lg hover:bg-slate-50 transition">
-                        <span class="text-purple-600 font-black text-lg">5</span>
-                        <p class="font-medium text-slate-700">الحكم على درجة دقة العبارة.</p>
+                    <div class="flex gap-4 p-4 rounded-xl bg-black/30 border border-white/5 hover:border-blue-400/50 hover:bg-white/10 transition-all backdrop-blur-sm">
+                        <span class="text-blue-300 font-black text-xl drop-shadow-md">5</span>
+                        <p class="font-medium text-gray-200">الحكم على درجة دقة العبارة.</p>
                     </div>
-                    <div class="flex gap-3 p-3 rounded-lg hover:bg-slate-50 transition">
-                        <span class="text-purple-600 font-black text-lg">6</span>
-                        <p class="font-medium text-slate-700">الحكم على تطبيق العبارة لقاعدة/قانون.</p>
+                    <div class="flex gap-4 p-4 rounded-xl bg-black/30 border border-white/5 hover:border-blue-400/50 hover:bg-white/10 transition-all backdrop-blur-sm">
+                        <span class="text-blue-300 font-black text-xl drop-shadow-md">6</span>
+                        <p class="font-medium text-gray-200">الحكم على تطبيق العبارة لقاعدة/قانون.</p>
                     </div>
-                    <div class="flex gap-3 p-3 rounded-lg hover:bg-slate-50 transition">
-                        <span class="text-purple-600 font-black text-lg">7</span>
-                        <p class="font-medium text-slate-700">الحكم على درجة إحكام العبارة.</p>
+                    <div class="flex gap-4 p-4 rounded-xl bg-black/30 border border-white/5 hover:border-blue-400/50 hover:bg-white/10 transition-all backdrop-blur-sm">
+                        <span class="text-blue-300 font-black text-xl drop-shadow-md">7</span>
+                        <p class="font-medium text-gray-200">الحكم على درجة إحكام العبارة.</p>
                     </div>
-                    <div class="flex gap-3 p-3 rounded-lg hover:bg-slate-50 transition">
-                        <span class="text-purple-600 font-black text-lg">8</span>
-                        <p class="font-medium text-slate-700">الحكم على العبارة من خلال الملاحظة.</p>
+                    <div class="flex gap-4 p-4 rounded-xl bg-black/30 border border-white/5 hover:border-blue-400/50 hover:bg-white/10 transition-all backdrop-blur-sm">
+                        <span class="text-blue-300 font-black text-xl drop-shadow-md">8</span>
+                        <p class="font-medium text-gray-200">الحكم على العبارة من خلال الملاحظة.</p>
                     </div>
                 </div>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <div class="content-card p-6 md:p-8 border-t-4 border-t-amber-500">
-                    <h3 class="text-xl font-bold text-slate-800 mb-6 border-b border-slate-100 pb-4">أوجه الاتفاق بين الباحثين (ص 89)</h3>
+                <div class="content-card p-6 md:p-8">
+                    <h3 class="text-xl font-bold text-white mb-6 border-b border-white/20 pb-4 text-glow">أوجه الاتفاق بين الباحثين (ص 89)</h3>
                     <ul class="space-y-4">
-                        <li class="flex items-center gap-3 bg-amber-50 p-3 rounded-lg">
-                            <i class="fas fa-check-circle text-amber-500"></i>
-                            <span class="font-bold text-slate-800">مهارة معرفة الافتراضات والمسلمات.</span>
+                        <li class="flex items-center gap-3 bg-black/40 border border-emerald-500/20 p-4 rounded-xl hover:bg-emerald-900/30 transition-colors shadow-inner">
+                            <i class="fas fa-check-circle text-emerald-400 text-xl"></i>
+                            <span class="font-bold text-gray-100 text-glow">مهارة معرفة الافتراضات والمسلمات.</span>
                         </li>
-                        <li class="flex items-center gap-3 bg-amber-50 p-3 rounded-lg">
-                            <i class="fas fa-check-circle text-amber-500"></i>
-                            <span class="font-bold text-slate-800">مهارة الاستنتاج.</span>
+                        <li class="flex items-center gap-3 bg-black/40 border border-emerald-500/20 p-4 rounded-xl hover:bg-emerald-900/30 transition-colors shadow-inner">
+                            <i class="fas fa-check-circle text-emerald-400 text-xl"></i>
+                            <span class="font-bold text-gray-100 text-glow">مهارة الاستنتاج.</span>
                         </li>
-                        <li class="flex items-center gap-3 bg-amber-50 p-3 rounded-lg">
-                            <i class="fas fa-check-circle text-amber-500"></i>
-                            <span class="font-bold text-slate-800">مهارة التفسير.</span>
+                        <li class="flex items-center gap-3 bg-black/40 border border-emerald-500/20 p-4 rounded-xl hover:bg-emerald-900/30 transition-colors shadow-inner">
+                            <i class="fas fa-check-circle text-emerald-400 text-xl"></i>
+                            <span class="font-bold text-gray-100 text-glow">مهارة التفسير.</span>
                         </li>
-                        <li class="flex items-center gap-3 bg-amber-50 p-3 rounded-lg">
-                            <i class="fas fa-check-circle text-amber-500"></i>
-                            <span class="font-bold text-slate-800">مهارة الاستدلال.</span>
+                        <li class="flex items-center gap-3 bg-black/40 border border-emerald-500/20 p-4 rounded-xl hover:bg-emerald-900/30 transition-colors shadow-inner">
+                            <i class="fas fa-check-circle text-emerald-400 text-xl"></i>
+                            <span class="font-bold text-gray-100 text-glow">مهارة الاستدلال.</span>
                         </li>
-                        <li class="flex items-center gap-3 bg-amber-50 p-3 rounded-lg">
-                            <i class="fas fa-check-circle text-amber-500"></i>
-                            <span class="font-bold text-slate-800">مهارة تقويم الحجج.</span>
+                        <li class="flex items-center gap-3 bg-black/40 border border-emerald-500/20 p-4 rounded-xl hover:bg-emerald-900/30 transition-colors shadow-inner">
+                            <i class="fas fa-check-circle text-emerald-400 text-xl"></i>
+                            <span class="font-bold text-gray-100 text-glow">مهارة تقويم الحجج.</span>
                         </li>
                     </ul>
                 </div>
 
-                <div class="content-card p-6 md:p-8">
-                    <h3 class="text-xl font-bold text-slate-800 mb-6 border-b border-slate-100 pb-4">علماء اختبارات القياس (ص 90-91)</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm border border-slate-200">سميث (1942)</span>
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm border border-slate-200">رست</span>
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm border border-slate-200">ادواردز (1950)</span>
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm border border-slate-200">ماس ورود (1953)</span>
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm border border-slate-200">هندام وجابر (1970)</span>
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm border border-slate-200">إبراهيم وجيه (1975)</span>
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm border border-slate-200">واطسن جليسر (1980)</span>
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm border border-slate-200">كورنيل (1981)</span>
-                        <span class="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-bold text-sm border border-slate-200">عبد السلام وسليمان (1982)</span>
+                <div class="content-card p-6 md:p-8 text-center flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-white mb-8 border-b border-white/20 pb-4 text-glow text-right">علماء اختبارات القياس (ص 90-91)</h3>
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <span class="px-5 py-2.5 bg-black/60 text-yellow-400 rounded-full font-bold border border-yellow-500/40 shadow-[0_0_10px_rgba(234,179,8,0.2)]">سميث (1942)</span>
+                        <span class="px-5 py-2.5 bg-black/40 text-gray-200 rounded-full font-bold border border-white/10 hover:bg-white/10 transition-colors">رست</span>
+                        <span class="px-5 py-2.5 bg-black/40 text-gray-200 rounded-full font-bold border border-white/10 hover:bg-white/10 transition-colors">ادواردز (1950)</span>
+                        <span class="px-5 py-2.5 bg-black/40 text-gray-200 rounded-full font-bold border border-white/10 hover:bg-white/10 transition-colors">ماس ورود (1953)</span>
+                        <span class="px-5 py-2.5 bg-black/40 text-gray-200 rounded-full font-bold border border-white/10 hover:bg-white/10 transition-colors">هندام وجابر (1970)</span>
+                        <span class="px-5 py-2.5 bg-black/40 text-gray-200 rounded-full font-bold border border-white/10 hover:bg-white/10 transition-colors">إبراهيم وجيه (1975)</span>
+                        <span class="px-5 py-2.5 bg-emerald-600/40 text-emerald-200 rounded-full font-bold border border-emerald-400/60 shadow-[0_0_15px_rgba(16,185,129,0.3)]">واطسن جليسر (1980)</span>
+                        <span class="px-5 py-2.5 bg-black/40 text-gray-200 rounded-full font-bold border border-white/10 hover:bg-white/10 transition-colors">كورنيل (1981)</span>
+                        <span class="px-5 py-2.5 bg-black/40 text-gray-200 rounded-full font-bold border border-white/10 hover:bg-white/10 transition-colors">عبد السلام وسليمان (1982)</span>
                     </div>
                 </div>
             </div>
@@ -360,66 +393,66 @@
         <!-- Section 4: Obstacles -->
         <section id="obstacles" class="scroll-mt-32">
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xl">
+                <div class="w-10 h-10 rounded-full bg-red-900/50 border border-red-500/50 text-red-400 flex items-center justify-center text-xl shadow-[0_0_20px_rgba(239,68,68,0.3)] backdrop-blur-md">
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
-                <h2 class="text-3xl font-black text-slate-800">معوقات التفكير الناقد</h2>
+                <h2 class="text-3xl font-black text-white tracking-wide text-glow">معوقات التفكير الناقد</h2>
             </div>
 
-            <div class="content-card overflow-hidden">
+            <div class="content-card overflow-hidden !border-t-red-500">
                 <div class="grid md:grid-cols-2">
-                    <div class="p-6 md:p-8 bg-white">
-                        <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                            <i class="fas fa-times-circle text-red-500"></i> المعوقات الـ 7 العامة (ص 91)
+                    <div class="p-6 md:p-8 bg-black/30">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2 text-glow">
+                            <i class="fas fa-times-circle text-red-500 drop-shadow-md"></i> المعوقات الـ 7 العامة (ص 91)
                         </h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-3">
-                                <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center shrink-0 text-sm font-bold">1</span>
-                                <p class="text-slate-700 font-medium">التسرع في فهم واستيعاب المواد المقروءة أو المسموعة.</p>
+                        <ul class="space-y-5">
+                            <li class="flex items-center gap-4 bg-white/5 p-3 rounded-lg border border-transparent hover:border-red-500/30 transition-colors">
+                                <span class="w-8 h-8 rounded-lg bg-red-900/60 text-red-300 border border-red-700/50 flex items-center justify-center shrink-0 text-sm font-black shadow-inner">1</span>
+                                <p class="text-gray-200 font-medium">التسرع في فهم واستيعاب المواد المقروءة أو المسموعة.</p>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center shrink-0 text-sm font-bold">2</span>
-                                <p class="text-slate-700 font-medium">التسرع في إصدار الأحكام وإبداء الآراء.</p>
+                            <li class="flex items-center gap-4 bg-white/5 p-3 rounded-lg border border-transparent hover:border-red-500/30 transition-colors">
+                                <span class="w-8 h-8 rounded-lg bg-red-900/60 text-red-300 border border-red-700/50 flex items-center justify-center shrink-0 text-sm font-black shadow-inner">2</span>
+                                <p class="text-gray-200 font-medium">التسرع في إصدار الأحكام وإبداء الآراء.</p>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center shrink-0 text-sm font-bold">3</span>
-                                <p class="text-slate-700 font-medium">البعد عن الموضوعية عند تقييم الأفكار.</p>
+                            <li class="flex items-center gap-4 bg-white/5 p-3 rounded-lg border border-transparent hover:border-red-500/30 transition-colors">
+                                <span class="w-8 h-8 rounded-lg bg-red-900/60 text-red-300 border border-red-700/50 flex items-center justify-center shrink-0 text-sm font-black shadow-inner">3</span>
+                                <p class="text-gray-200 font-medium">البعد عن الموضوعية عند تقييم الأفكار.</p>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center shrink-0 text-sm font-bold">4</span>
-                                <p class="text-slate-700 font-medium">التعصب لرأي معين والميل مع الهوى والتحيز.</p>
+                            <li class="flex items-center gap-4 bg-white/5 p-3 rounded-lg border border-transparent hover:border-red-500/30 transition-colors">
+                                <span class="w-8 h-8 rounded-lg bg-red-900/60 text-red-300 border border-red-700/50 flex items-center justify-center shrink-0 text-sm font-black shadow-inner">4</span>
+                                <p class="text-gray-200 font-medium">التعصب لرأي معين والميل مع الهوى والتحيز.</p>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center shrink-0 text-sm font-bold">5</span>
-                                <p class="text-slate-700 font-medium">البعد عن التفكير المنطقي والاقتراب من الخرافي.</p>
+                            <li class="flex items-center gap-4 bg-white/5 p-3 rounded-lg border border-transparent hover:border-red-500/30 transition-colors">
+                                <span class="w-8 h-8 rounded-lg bg-red-900/60 text-red-300 border border-red-700/50 flex items-center justify-center shrink-0 text-sm font-black shadow-inner">5</span>
+                                <p class="text-gray-200 font-medium">البعد عن التفكير المنطقي والاقتراب من الخرافي.</p>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center shrink-0 text-sm font-bold">6</span>
-                                <p class="text-slate-700 font-medium">مسايرة الاتجاهات الشائعة دون تحكيم العقل.</p>
+                            <li class="flex items-center gap-4 bg-white/5 p-3 rounded-lg border border-transparent hover:border-red-500/30 transition-colors">
+                                <span class="w-8 h-8 rounded-lg bg-red-900/60 text-red-300 border border-red-700/50 flex items-center justify-center shrink-0 text-sm font-black shadow-inner">6</span>
+                                <p class="text-gray-200 font-medium">مسايرة الاتجاهات الشائعة دون تحكيم العقل.</p>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center shrink-0 text-sm font-bold">7</span>
-                                <p class="text-slate-700 font-medium">التفكير الروتيني أو التفكير الجامد المحدود.</p>
+                            <li class="flex items-center gap-4 bg-white/5 p-3 rounded-lg border border-transparent hover:border-red-500/30 transition-colors">
+                                <span class="w-8 h-8 rounded-lg bg-red-900/60 text-red-300 border border-red-700/50 flex items-center justify-center shrink-0 text-sm font-black shadow-inner">7</span>
+                                <p class="text-gray-200 font-medium">التفكير الروتيني أو التفكير الجامد المحدود.</p>
                             </li>
                         </ul>
                     </div>
                     
-                    <div class="p-6 md:p-8 bg-red-50/50 border-r border-red-100">
-                        <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                            <i class="fas fa-lock text-red-600"></i> معوقات سليمان عبد الواحد (ص 92)
+                    <div class="p-6 md:p-8 bg-red-950/30 border-r border-white/5 backdrop-blur-md">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2 text-glow">
+                            <i class="fas fa-lock text-red-400 drop-shadow-md"></i> معوقات سليمان عبد الواحد (ص 92)
                         </h3>
                         <div class="space-y-6">
-                            <div class="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
-                                <h4 class="font-bold text-red-700 text-lg mb-2">الدوجماطية:</h4>
-                                <p class="text-slate-600 text-sm leading-relaxed">النظام الاعتقادي المغلق، يتسم بالجمود ومعارضة الأفكار الجديدة، ضيق الأفق والنظرة التسلطية.</p>
+                            <div class="bg-black/50 p-6 rounded-xl border border-red-500/20 shadow-inner hover:border-red-500/50 transition-colors">
+                                <h4 class="font-bold text-red-400 text-xl mb-2 text-glow">الدوجماطية:</h4>
+                                <p class="text-gray-300 leading-relaxed">النظام الاعتقادي المغلق، يتسم بالجمود ومعارضة الأفكار الجديدة، ضيق الأفق والنظرة التسلطية.</p>
                             </div>
-                            <div class="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
-                                <h4 class="font-bold text-red-700 text-lg mb-2">الجمود الفكري:</h4>
-                                <p class="text-slate-600 text-sm leading-relaxed">عدم المرونة ومقاومة التغيير والتشبث بالآراء، وكلما زاد تلاشت قدرة التفكير الناقد.</p>
+                            <div class="bg-black/50 p-6 rounded-xl border border-red-500/20 shadow-inner hover:border-red-500/50 transition-colors">
+                                <h4 class="font-bold text-red-400 text-xl mb-2 text-glow">الجمود الفكري:</h4>
+                                <p class="text-gray-300 leading-relaxed">عدم المرونة ومقاومة التغيير والتشبث بالآراء، وكلما زاد تلاشت قدرة التفكير الناقد.</p>
                             </div>
-                            <div class="bg-white p-5 rounded-xl border border-red-100 shadow-sm">
-                                <h4 class="font-bold text-red-700 text-lg mb-2">المسايرة:</h4>
-                                <p class="text-slate-600 text-sm leading-relaxed">انصياع الفرد لآراء المحيطين به والتأثر بهم دون وعي، مما يعوق استقلالية التفكير.</p>
+                            <div class="bg-black/50 p-6 rounded-xl border border-red-500/20 shadow-inner hover:border-red-500/50 transition-colors">
+                                <h4 class="font-bold text-red-400 text-xl mb-2 text-glow">المسايرة:</h4>
+                                <p class="text-gray-300 leading-relaxed">انصياع الفرد لآراء المحيطين به والتأثر بهم دون وعي، مما يعوق استقلالية التفكير.</p>
                             </div>
                         </div>
                     </div>
@@ -430,67 +463,79 @@
         <!-- Section 5: Development -->
         <section id="development" class="scroll-mt-32">
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-xl">
+                <div class="w-10 h-10 rounded-full bg-emerald-900/50 border border-emerald-400/50 text-emerald-300 flex items-center justify-center text-xl shadow-[0_0_20px_rgba(16,185,129,0.3)] backdrop-blur-md">
                     <i class="fas fa-chart-line"></i>
                 </div>
-                <h2 class="text-3xl font-black text-slate-800">التنمية ودور المعلم</h2>
+                <h2 class="text-3xl font-black text-white tracking-wide text-glow">التنمية ودور المعلم</h2>
             </div>
 
-            <div class="content-card p-6 md:p-8 mb-8 border-t-4 border-t-teal-500">
-                <h3 class="text-xl font-bold text-slate-800 mb-6">خطوات تنمية التفكير الناقد (ص 94-95)</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div>
-                        <div class="text-teal-500 font-black text-4xl mb-2 opacity-50">01</div>
-                        <h4 class="font-bold text-slate-800">تحديد الهدف والمشكلة</h4>
-                        <p class="text-sm text-slate-600 mt-1">صياغتها بطريقة واضحة وقابلة للتفاوض.</p>
+            <div class="content-card p-6 md:p-8 mb-8 !border-t-emerald-400">
+                <h3 class="text-xl font-bold text-white mb-8 border-b border-white/20 pb-4 text-glow">خطوات تنمية التفكير الناقد (ص 94-95)</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="relative group bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all overflow-hidden">
+                        <div class="text-emerald-500/20 font-black text-6xl absolute -top-2 -right-4 transition-transform group-hover:scale-110 z-0">01</div>
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-emerald-300 text-xl mb-2 text-glow">تحديد الهدف والمشكلة</h4>
+                            <p class="text-gray-300">صياغتها بطريقة واضحة وقابلة للتفاوض.</p>
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-teal-500 font-black text-4xl mb-2 opacity-50">02</div>
-                        <h4 class="font-bold text-slate-800">معرفة الافتراضات</h4>
-                        <p class="text-sm text-slate-600 mt-1">بشرط أن تتسم بالمنطقية والعقلانية.</p>
+                    <div class="relative group bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all overflow-hidden">
+                        <div class="text-emerald-500/20 font-black text-6xl absolute -top-2 -right-4 transition-transform group-hover:scale-110 z-0">02</div>
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-emerald-300 text-xl mb-2 text-glow">معرفة الافتراضات</h4>
+                            <p class="text-gray-300">بشرط أن تتسم بالمنطقية والعقلانية.</p>
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-teal-500 font-black text-4xl mb-2 opacity-50">03</div>
-                        <h4 class="font-bold text-slate-800">التفسير</h4>
-                        <p class="text-sm text-slate-600 mt-1">لتحليل الهدف ومعرفة المعلومات المعطاة للحل.</p>
+                    <div class="relative group bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all overflow-hidden">
+                        <div class="text-emerald-500/20 font-black text-6xl absolute -top-2 -right-4 transition-transform group-hover:scale-110 z-0">03</div>
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-emerald-300 text-xl mb-2 text-glow">التفسير</h4>
+                            <p class="text-gray-300">لتحليل الهدف ومعرفة المعلومات المعطاة للحل.</p>
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-teal-500 font-black text-4xl mb-2 opacity-50">04</div>
-                        <h4 class="font-bold text-slate-800">القياس والتقويم</h4>
-                        <p class="text-sm text-slate-600 mt-1">التنبؤ بالنتائج وتقويم المناقشات للبدائل.</p>
+                    <div class="relative group bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all overflow-hidden">
+                        <div class="text-emerald-500/20 font-black text-6xl absolute -top-2 -right-4 transition-transform group-hover:scale-110 z-0">04</div>
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-emerald-300 text-xl mb-2 text-glow">القياس والتقويم</h4>
+                            <p class="text-gray-300">التنبؤ بالنتائج وتقويم المناقشات للبدائل.</p>
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-teal-500 font-black text-4xl mb-2 opacity-50">05</div>
-                        <h4 class="font-bold text-slate-800">الاستنباط والاستنتاج</h4>
-                        <p class="text-sm text-slate-600 mt-1">الوصول لنتائج وتعميمات تفيد بمشكلات مشابهة.</p>
+                    <div class="relative group bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all overflow-hidden">
+                        <div class="text-emerald-500/20 font-black text-6xl absolute -top-2 -right-4 transition-transform group-hover:scale-110 z-0">05</div>
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-emerald-300 text-xl mb-2 text-glow">الاستنباط والاستنتاج</h4>
+                            <p class="text-gray-300">الوصول لنتائج وتعميمات تفيد بمشكلات مشابهة.</p>
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-teal-500 font-black text-4xl mb-2 opacity-50">06</div>
-                        <h4 class="font-bold text-slate-800">بناء السيناريو</h4>
-                        <p class="text-sm text-slate-600 mt-1">تصورات لتقويم الحل عبر البدائل والمحكات.</p>
+                    <div class="relative group bg-white/5 p-5 rounded-2xl border border-white/10 hover:bg-white/10 transition-all overflow-hidden">
+                        <div class="text-emerald-500/20 font-black text-6xl absolute -top-2 -right-4 transition-transform group-hover:scale-110 z-0">06</div>
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-emerald-300 text-xl mb-2 text-glow">بناء السيناريو</h4>
+                            <p class="text-gray-300">تصورات لتقويم الحل عبر البدائل والمحكات.</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="content-card p-6 md:p-8 bg-gradient-to-br from-slate-800 to-slate-900 text-white">
-                <h3 class="text-xl font-bold text-white mb-4">دور المعلم (ص 97 - للفهم)</h3>
-                <p class="text-slate-300 mb-6 text-sm">يلعب المعلم دوراً محورياً في تهيئة البيئة المحفزة. ويجب أن يكون <span class="text-teal-400 font-bold">ديمقراطياً واسع الأفق</span>:</p>
+            <div class="content-card p-8 bg-gradient-to-br from-black/80 to-emerald-950/60 text-white border border-emerald-500/20">
+                <h3 class="text-2xl font-bold text-yellow-400 mb-6 border-b border-white/10 pb-4 text-glow"><i class="fas fa-chalkboard-teacher ml-2"></i> دور المعلم (ص 97 - للفهم)</h3>
+                <p class="text-gray-200 mb-8 text-lg">يلعب المعلم دوراً محورياً في تهيئة البيئة المحفزة. ويجب أن يكون <span class="text-emerald-300 font-bold bg-emerald-900/50 px-3 py-1 rounded-lg border border-emerald-500/30 shadow-inner">ديمقراطياً واسع الأفق</span>:</p>
                 <div class="grid sm:grid-cols-2 gap-6">
-                    <div class="bg-white/10 p-5 rounded-xl border border-white/10">
-                        <h4 class="font-bold text-teal-300 mb-2">1. التوجيه المباشر</h4>
-                        <p class="text-sm text-slate-300">تقديم المهارات خطوة بخطوة، وعرض مناظرات حية لمناقشتها.</p>
+                    <div class="bg-black/40 p-6 rounded-2xl border border-white/10 shadow-inner hover:border-emerald-500/30 transition-colors">
+                        <h4 class="font-bold text-emerald-400 text-xl mb-3 text-glow">1. التوجيه المباشر</h4>
+                        <p class="text-gray-300 leading-relaxed">تقديم المهارات خطوة بخطوة، وعرض مناظرات حية لمناقشتها.</p>
                     </div>
-                    <div class="bg-white/10 p-5 rounded-xl border border-white/10">
-                        <h4 class="font-bold text-teal-300 mb-2">2. التطبيق العملي</h4>
-                        <p class="text-sm text-slate-300">إشراك الطلاب فعلياً في مناظرات بمواقف تتطلب تفكيراً ناقداً.</p>
+                    <div class="bg-black/40 p-6 rounded-2xl border border-white/10 shadow-inner hover:border-emerald-500/30 transition-colors">
+                        <h4 class="font-bold text-emerald-400 text-xl mb-3 text-glow">2. التطبيق العملي</h4>
+                        <p class="text-gray-300 leading-relaxed">إشراك الطلاب فعلياً في مناظرات بمواقف تتطلب تفكيراً ناقداً.</p>
                     </div>
-                    <div class="bg-white/10 p-5 rounded-xl border border-white/10">
-                        <h4 class="font-bold text-teal-300 mb-2">3. تنمية مهارات محددة</h4>
-                        <p class="text-sm text-slate-300">تدريبهم على المقارنة، تسجيل الملاحظات، التلخيص، النقد الموضوعي.</p>
+                    <div class="bg-black/40 p-6 rounded-2xl border border-white/10 shadow-inner hover:border-emerald-500/30 transition-colors">
+                        <h4 class="font-bold text-emerald-400 text-xl mb-3 text-glow">3. تنمية مهارات محددة</h4>
+                        <p class="text-gray-300 leading-relaxed">تدريبهم على المقارنة، تسجيل الملاحظات، التلخيص، النقد الموضوعي.</p>
                     </div>
-                    <div class="bg-white/10 p-5 rounded-xl border border-white/10">
-                        <h4 class="font-bold text-teal-300 mb-2">4. البناء الفكري السليم</h4>
-                        <p class="text-sm text-slate-300">تصنيف الأفكار، التسلسل المنطقي، التنبؤ، وتكوين الفرضيات.</p>
+                    <div class="bg-black/40 p-6 rounded-2xl border border-white/10 shadow-inner hover:border-emerald-500/30 transition-colors">
+                        <h4 class="font-bold text-emerald-400 text-xl mb-3 text-glow">4. البناء الفكري السليم</h4>
+                        <p class="text-gray-300 leading-relaxed">تصنيف الأفكار، التسلسل المنطقي، التنبؤ، وتكوين الفرضيات.</p>
                     </div>
                 </div>
             </div>
@@ -498,34 +543,37 @@
 
         <!-- Section 6: Quiz -->
         <section id="quiz" class="scroll-mt-32">
-            <div class="content-card p-6 md:p-10 border-t-4 border-t-sky-500">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-slate-100 pb-6">
+            <div class="content-card p-6 md:p-10 !border-t-emerald-400 shadow-[0_0_40px_rgba(16,185,129,0.15)] relative overflow-hidden">
+                <!-- توهج خلفي للاختبار -->
+                <div class="absolute inset-0 bg-gradient-to-b from-emerald-900/10 to-transparent pointer-events-none"></div>
+                
+                <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 border-b border-white/20 pb-6 relative z-10">
                     <div>
-                        <h2 class="text-3xl font-black text-slate-800 flex items-center gap-3">
-                            <i class="fas fa-laptop-code text-sky-500"></i> اختبر نفسك
+                        <h2 class="text-3xl font-black text-white flex items-center gap-3 tracking-wide text-glow">
+                            <i class="fas fa-laptop-code text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]"></i> اختبر نفسك
                         </h2>
-                        <p class="text-slate-500 mt-2 font-medium">30 سؤال شامل للمادة للتأكد من فهمك.</p>
+                        <p class="text-gray-300 mt-2 font-medium">30 سؤال شامل للمادة للتأكد من فهمك.</p>
                     </div>
-                    <div class="bg-sky-50 text-sky-700 px-6 py-3 rounded-xl font-bold border border-sky-100 text-xl shadow-sm">
-                        النتيجة: <span id="score-display">0</span> / 30
+                    <div class="bg-black/60 text-emerald-300 px-8 py-4 rounded-2xl font-bold border border-emerald-500/50 text-2xl shadow-inner min-w-[180px] text-center backdrop-blur-md">
+                        النتيجة: <span id="score-display" class="text-yellow-400 drop-shadow-md">0</span> / 30
                     </div>
                 </div>
                 
-                <form id="quiz-form" class="space-y-10">
+                <form id="quiz-form" class="space-y-10 relative z-10">
                     <div id="questions-container" class="space-y-8">
                         <!-- JS injects questions here -->
                     </div>
                     
-                    <div class="text-center pt-8">
-                        <button type="button" onclick="calculateScore()" class="bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white font-bold py-4 px-10 rounded-xl shadow-xl transition-all transform hover:-translate-y-1 text-lg">
-                            <i class="fas fa-check-circle ml-2"></i> إظهار النتيجة والتصحيح
+                    <div class="text-center pt-10 border-t border-white/20 mt-12">
+                        <button type="button" onclick="calculateScore()" class="bg-gradient-to-r from-emerald-600 to-green-800 border border-emerald-400/50 hover:from-emerald-500 hover:to-green-700 text-white font-bold py-5 px-14 rounded-2xl shadow-[0_0_25px_rgba(16,185,129,0.4)] transition-all transform hover:-translate-y-2 text-xl">
+                            <i class="fas fa-check-double ml-2"></i> إظهار النتيجة والتصحيح
                         </button>
-                        <button type="button" onclick="resetQuiz()" class="mt-4 text-slate-500 font-bold py-3 px-8 rounded-xl hover:bg-slate-100 transition hidden mx-auto" id="reset-btn">
+                        <button type="button" onclick="resetQuiz()" class="mt-6 text-gray-400 font-bold py-3 px-8 rounded-xl hover:bg-white/10 hover:text-white transition hidden mx-auto border border-transparent hover:border-white/20" id="reset-btn">
                             <i class="fas fa-redo ml-2"></i> إعادة الاختبار
                         </button>
                     </div>
                     
-                    <div id="result-message" class="hidden text-center mt-8 p-6 rounded-2xl font-bold text-xl transition-all duration-500 shadow-sm border border-slate-200">
+                    <div id="result-message" class="hidden text-center mt-10 p-8 rounded-3xl font-bold text-2xl transition-all duration-500 shadow-2xl border relative overflow-hidden backdrop-blur-xl">
                     </div>
                 </form>
             </div>
@@ -534,18 +582,18 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-300 py-12 mt-16 border-t-4 border-emerald-500">
+    <footer class="bg-black/60 backdrop-blur-2xl text-gray-300 py-16 mt-20 border-t border-white/10 relative z-10">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center text-emerald-400 text-2xl mx-auto mb-4">
-                <i class="fas fa-user-graduate"></i>
+            <div class="w-20 h-20 bg-gradient-to-br from-emerald-900 to-black rounded-full flex items-center justify-center text-yellow-400 text-3xl mx-auto mb-6 border border-yellow-500/40 shadow-[0_0_25px_rgba(234,179,8,0.3)]">
+                <i class="fas fa-user-graduate drop-shadow-md"></i>
             </div>
-            <h3 class="text-2xl font-black text-white mb-2">إعداد وتصميم: قيس الجازي</h3>
-            <p class="text-slate-400 text-sm mb-6">ملخص شامل لمادة مهارات التفكير الناقد - الفصل الثالث</p>
-            <div class="flex justify-center space-x-4 space-x-reverse text-slate-500 text-xl mb-8">
-                <a href="#" class="hover:text-emerald-400 transition"><i class="fas fa-envelope"></i></a>
-                <a href="#" class="hover:text-sky-400 transition"><i class="fas fa-share-alt"></i></a>
+            <h3 class="text-3xl font-black text-white mb-3 tracking-wider text-glow">إعداد وتصميم: <span class="text-emerald-400">قيس الجازي</span></h3>
+            <p class="text-gray-400 text-base mb-8">ملخص شامل لمادة مهارات التفكير الناقد - الفصل الثالث</p>
+            <div class="flex justify-center space-x-6 space-x-reverse text-gray-400 text-2xl mb-10">
+                <a href="#" class="hover:text-emerald-400 transition transform hover:scale-125 hover:drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]"><i class="fas fa-envelope"></i></a>
+                <a href="#" class="hover:text-yellow-400 transition transform hover:scale-125 hover:drop-shadow-[0_0_10px_rgba(234,179,8,0.8)]"><i class="fas fa-share-alt"></i></a>
             </div>
-            <p class="text-slate-600 text-xs">&copy; 2026 تم التصميم والبرمجة خصيصاً لتسهيل العملية التعليمية.</p>
+            <p class="text-gray-500 text-sm">&copy; 2026 تم التصميم والبرمجة خصيصاً لتسهيل العملية التعليمية بأرقى المعايير.</p>
         </div>
     </footer>
 
@@ -588,19 +636,19 @@
         let userAnswers = new Array(questions.length).fill(null);
         let isSubmitted = false;
 
-        // Render questions
+        // Render questions (Dark Luxury Pattern)
         questions.forEach((q, index) => {
             const questionHTML = `
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm" id="q-block-${index}">
-                    <h3 class="font-extrabold text-lg mb-5 text-slate-800 leading-relaxed">
-                        <span class="inline-block bg-sky-100 text-sky-700 w-8 h-8 text-center rounded-lg ml-2 leading-8 font-black">${index + 1}</span> 
+                <div class="bg-black/40 p-6 md:p-8 rounded-2xl border border-white/10 shadow-inner backdrop-blur-md hover:border-emerald-500/40 transition-all duration-300" id="q-block-${index}">
+                    <h3 class="font-extrabold text-xl mb-6 text-white leading-relaxed text-glow">
+                        <span class="inline-block bg-emerald-900/50 text-emerald-400 border border-emerald-500/50 w-10 h-10 text-center rounded-xl ml-3 leading-10 font-black shadow-[0_0_10px_rgba(16,185,129,0.3)]">${index + 1}</span> 
                         ${q.q}
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pl-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-3">
                         ${q.options.map((opt, i) => `
                             <div class="relative">
                                 <input type="radio" name="q${index}" id="q${index}-opt${i}" value="${i}" class="quiz-option-input opacity-0 absolute w-0 h-0" onchange="recordAnswer(${index}, ${i})" ${isSubmitted ? 'disabled' : ''}>
-                                <label for="q${index}-opt${i}" class="quiz-option-label" id="lbl-${index}-${i}">
+                                <label for="q${index}-opt${i}" class="quiz-option-label text-lg" id="lbl-${index}-${i}">
                                     ${opt}
                                 </label>
                             </div>
@@ -620,7 +668,6 @@
         function calculateScore() {
             if (isSubmitted) return;
 
-            // Check if all questions answered
             const unanswered = userAnswers.filter(a => a === null).length;
             if (unanswered > 0) {
                 alert(`الرجاء الإجابة على جميع الأسئلة يا قيس. متبقي ${unanswered} سؤال.`);
@@ -634,25 +681,20 @@
                 const userAns = userAnswers[index];
                 const correctAns = q.answer;
 
-                // Disable all inputs
                 const inputs = document.getElementsByName(`q${index}`);
                 inputs.forEach(input => input.disabled = true);
 
-                // Highlight correct answer
                 const correctLabel = document.getElementById(`lbl-${index}-${correctAns}`);
                 correctLabel.classList.add('correct-ans');
 
-                // Check user answer
                 if (userAns === correctAns) {
                     score++;
                 } else {
-                    // Highlight wrong user answer
                     const wrongLabel = document.getElementById(`lbl-${index}-${userAns}`);
                     wrongLabel.classList.add('wrong-ans');
                 }
             });
 
-            // Display Score
             document.getElementById('score-display').innerText = score;
             document.getElementById('reset-btn').classList.remove('hidden');
             
@@ -660,21 +702,21 @@
             resultBox.classList.remove('hidden');
             
             let percentage = (score / 30) * 100;
+            // Dark luxury result boxes with glows
             if(percentage >= 90) {
-                resultBox.className = 'mt-8 p-6 rounded-2xl font-bold text-2xl transition-all duration-500 bg-emerald-50 text-emerald-800 border-2 border-emerald-200 shadow-md';
-                resultBox.innerHTML = `<i class="fas fa-trophy text-emerald-500 text-3xl mb-2 block"></i> بطل! نتيجتك ${score} من 30. عمل مذهل.`;
+                resultBox.className = 'mt-10 p-8 rounded-3xl font-bold text-3xl transition-all duration-500 bg-emerald-900/50 text-emerald-100 border border-emerald-400/60 shadow-[0_0_30px_rgba(16,185,129,0.4)] backdrop-blur-xl relative overflow-hidden';
+                resultBox.innerHTML = `<div class="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-transparent"></div><i class="fas fa-crown text-yellow-400 text-5xl mb-4 block drop-shadow-[0_0_15px_rgba(234,179,8,0.7)] relative z-10"></i><span class="relative z-10 text-glow">بطل! نتيجتك ${score} من 30. عمل مذهل وقيادي.</span>`;
             } else if (percentage >= 70) {
-                resultBox.className = 'mt-8 p-6 rounded-2xl font-bold text-2xl transition-all duration-500 bg-sky-50 text-sky-800 border-2 border-sky-200 shadow-md';
-                resultBox.innerHTML = `<i class="fas fa-star text-sky-500 text-3xl mb-2 block"></i> جيد جداً! نتيجتك ${score} من 30. واصل تقدمك!`;
+                resultBox.className = 'mt-10 p-8 rounded-3xl font-bold text-3xl transition-all duration-500 bg-blue-900/50 text-blue-100 border border-blue-400/60 shadow-[0_0_30px_rgba(59,130,246,0.4)] backdrop-blur-xl relative overflow-hidden';
+                resultBox.innerHTML = `<div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-transparent"></div><i class="fas fa-star text-blue-400 text-5xl mb-4 block drop-shadow-[0_0_15px_rgba(96,165,250,0.7)] relative z-10"></i><span class="relative z-10 text-glow">جيد جداً! نتيجتك ${score} من 30. واصل تقدمك!</span>`;
             } else if (percentage >= 50) {
-                resultBox.className = 'mt-8 p-6 rounded-2xl font-bold text-2xl transition-all duration-500 bg-amber-50 text-amber-800 border-2 border-amber-200 shadow-md';
-                resultBox.innerHTML = `مقبول. نتيجتك ${score} من 30. ننصحك بمراجعة المادة أعلاه.`;
+                resultBox.className = 'mt-10 p-8 rounded-3xl font-bold text-3xl transition-all duration-500 bg-yellow-900/50 text-yellow-100 border border-yellow-500/60 shadow-[0_0_30px_rgba(234,179,8,0.3)] backdrop-blur-xl relative overflow-hidden';
+                resultBox.innerHTML = `<span class="relative z-10 text-glow">مقبول. نتيجتك ${score} من 30. ننصحك بمراجعة المادة أعلاه.</span>`;
             } else {
-                resultBox.className = 'mt-8 p-6 rounded-2xl font-bold text-2xl transition-all duration-500 bg-red-50 text-red-800 border-2 border-red-200 shadow-md';
-                resultBox.innerHTML = `بحاجة لدراسة! نتيجتك ${score} من 30. اقرأ الشرح بتركيز أكبر.`;
+                resultBox.className = 'mt-10 p-8 rounded-3xl font-bold text-3xl transition-all duration-500 bg-red-900/50 text-red-100 border border-red-500/60 shadow-[0_0_30px_rgba(239,68,68,0.4)] backdrop-blur-xl relative overflow-hidden';
+                resultBox.innerHTML = `<span class="relative z-10 text-glow">بحاجة لدراسة! نتيجتك ${score} من 30. اقرأ الشرح بتركيز أكبر.</span>`;
             }
 
-            // Scroll to score
             resultBox.scrollIntoView({behavior: 'smooth', block: 'center'});
         }
 
